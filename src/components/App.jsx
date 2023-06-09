@@ -62,6 +62,7 @@ export class App extends Component {
         }
 
         this.setState({ isLoading: false });
+        if (this.state.onSubmit.length > 0)
         Notiflix.Notify.info('Search is executed');
       }
     );
