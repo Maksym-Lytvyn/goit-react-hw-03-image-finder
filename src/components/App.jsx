@@ -108,10 +108,8 @@ export class App extends Component {
   };
 
   render() {
-    const { onSubmit } = this.state;
     const { imageResults } = this.state;
     const { isLoading } = this.state;
-    const { mounted } = this.state;
     const { focusedImage } = this.state;
     const { error } = this.state;
     const isShowButton =
@@ -123,7 +121,7 @@ export class App extends Component {
       <div className={AppCSS.App}>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {isLoading === true && <Loader isLoading={isLoading} />}
-        {}<ImageGallery
+        <ImageGallery
           imageResults={imageResults}
           onOpenModal={this.handleOpenModal}
         />
