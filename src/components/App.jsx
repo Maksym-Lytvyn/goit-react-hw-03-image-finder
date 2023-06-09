@@ -8,6 +8,7 @@ import Loader from './Loader/Loader';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Error from './Error/Error';
+import Blank from './Blank/Blank';
 
 export class App extends Component {
   constructor() {
@@ -16,7 +17,7 @@ export class App extends Component {
       imageResults: [],
       onSubmit: '',
       isLoading: false,
-      page: 12,
+      page: 1,
       mounted: true,
       focusedImage: null,
       error: null,
@@ -112,6 +113,7 @@ export class App extends Component {
     const { isLoading } = this.state;
     const { focusedImage } = this.state;
     const { error } = this.state;
+    const { onSubmit } = this.state;
     const isShowButton =
       imageResults.length > 0 &&
       !isLoading &&
@@ -121,10 +123,10 @@ export class App extends Component {
       <div className={AppCSS.App}>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {isLoading === true && <Loader isLoading={isLoading} />}
-        <ImageGallery
+        {onSubmit === null || onSubmit === '' ? (<Blank/>) : (<ImageGallery
           imageResults={imageResults}
           onOpenModal={this.handleOpenModal}
-        />
+        />)}  
         {error === true && <Error error={'Sorry, nothing was found!'}/>}
         {isShowButton && <Button onClick={this.handleLoadMore} />}
         {focusedImage && (
