@@ -11,7 +11,7 @@ const ImageGalleryItem = ({ image, onOpenModal }) => {
       <img
         src={image.webformatURL}
         alt={image.alt}
-        className={ImageGalleryCSS.ImageGalleryItem - image}
+        className={ImageGalleryCSS.ImageGalleryItem}
         onClick={handleClick}
       />
     </li>
