@@ -75,14 +75,12 @@ export class App extends Component {
   };
 
   handleLoadMore = async prevState => {
-
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
+    const { page } = this.state;
+    const nextPage = page + 1;
     const response = await axios.get(
-      `https://pixabay.com/api/?q=${this.state.onSubmit}&page=${this.state.page}&key=35499078-ae1aac6b87ed3c45ca8fde2a7&image_type=photo&orientation=horizontal&per_page=12`
+      `https://pixabay.com/api/?q=${this.state.onSubmit}&page=${nextPage}&key=35499078-ae1aac6b87ed3c45ca8fde2a7&image_type=photo&orientation=horizontal&per_page=12`
     );
-    console.log(response);
+    console.log(this.state.page);
     if (
       response.data.hits.length === 0 &&
       response.data.hits.length.length <= 12
@@ -95,6 +93,7 @@ export class App extends Component {
     if (this.state.imageResults !== prevState.imageResults) {
       this.setState(prevState => ({
         imageResults: [...prevState.imageResults, ...response.data.hits],
+        page: nextPage
       }));
     }
 
