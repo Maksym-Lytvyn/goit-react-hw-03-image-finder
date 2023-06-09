@@ -61,18 +61,6 @@ export class App extends Component {
     );
   };
 
-  // async componentDidUpdate() {
-  //   const response = await axios.get(
-  //     `https://pixabay.com/api/?q=${this.state.onSubmit}&page=1&key=35499078-ae1aac6b87ed3c45ca8fde2a7&image_type=photo&orientation=horizontal&per_page=12`
-  //   );
-  //   setTimeout(() => {
-  //     this.setState({
-  //       imageResults: response.data.hits,
-  //       isLoading: false,
-  //     });
-  //   }, 2000);
-  // }
-
   handleLoadMore = async prevState => {
 
     this.setState(prevState => ({
@@ -119,6 +107,7 @@ export class App extends Component {
       !isLoading &&
       imageResults.length >= 12 &&
       imageResults.length % 12 === 0;
+
     return (
       <div className={AppCSS.App}>
         <Searchbar onSubmit={this.handleSearchSubmit} />
