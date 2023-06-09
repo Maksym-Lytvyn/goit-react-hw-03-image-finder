@@ -22,6 +22,7 @@ export class App extends Component {
       mounted: true,
       focusedImage: null,
       error: null,
+      blank: false
     };
   }
 
@@ -35,7 +36,7 @@ export class App extends Component {
         imageResults: [],
         page: 1,
         onSubmit,
-        isLoading: true,
+        isLoading: true
       },
       async () => {
         try {
@@ -48,12 +49,18 @@ export class App extends Component {
               isLoading: false,
               error: true
             });
+            Notiflix.Notify.failure('No results are found!')
+          }
+          else if(this.state.onSubmit === '') {
+            this.setState({blank: true})
           }
           else {
             this.setState({ 
               imageResults: response.data.hits,
-              error: false
+              error: false,
+              blank: false
             });
+            Notiflix.Notify.info('Search is executed');
           }
           
         } catch (error) {
@@ -62,8 +69,7 @@ export class App extends Component {
         }
 
         this.setState({ isLoading: false });
-        if (this.state.onSubmit.length > 0)
-        Notiflix.Notify.info('Search is executed');
+        
       }
     );
   };
@@ -110,11 +116,13 @@ export class App extends Component {
     const { focusedImage } = this.state;
     const { error } = this.state;
     const { onSubmit } = this.state;
+    const { blank } = this.state;
     const isShowButton =
       imageResults.length > 0 &&
       !isLoading &&
       imageResults.length >= 12 &&
-      imageResults.length % 12 === 0;
+      imageResults.length % 12 === 0 &&
+      blank === false;
 
     return (
       <div className={AppCSS.App}>
