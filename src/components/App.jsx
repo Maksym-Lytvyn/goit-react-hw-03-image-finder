@@ -27,7 +27,7 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    Notiflix.Notify.info('Program is ready');
+    Notiflix.Notify.info('Застосунок запущено!');
   }
 
   handleSearchSubmit = async onSubmit => {
@@ -49,7 +49,7 @@ export class App extends Component {
               isLoading: false,
               error: true
             });
-            Notiflix.Notify.failure('No results are found!')
+            Notiflix.Notify.failure('Немає результатів!')
           }
           else if(this.state.onSubmit === '') {
             this.setState({blank: true})
@@ -60,7 +60,7 @@ export class App extends Component {
               error: false,
               blank: false
             });
-            Notiflix.Notify.info('Search is executed');
+            Notiflix.Notify.info('Пошук виконано');
           }
           
         } catch (error) {
@@ -85,7 +85,6 @@ export class App extends Component {
       response.data.hits.length === 0 &&
       response.data.hits.length.length <= 12
     ) {
-      console.log('No more images found.');
       this.setState({ isLoading: false });
 
       return;
@@ -95,6 +94,7 @@ export class App extends Component {
         imageResults: [...prevState.imageResults, ...response.data.hits],
         page: nextPage
       }));
+      Notiflix.Notify.success("Завантажено додаткові результати за запитом!")
     }
 
     this.setState({ isLoading: false });
@@ -131,7 +131,7 @@ export class App extends Component {
           imageResults={imageResults}
           onOpenModal={this.handleOpenModal}
         />)}  
-        {error === true && <Error error={'Sorry, nothing was found!'}/>}
+        {error === true && <Error error={'Нажаль за вашим запитом результатів не було знайдено! Спробуйте інший запит'}/>}
         {isShowButton && <Button onClick={this.handleLoadMore} />}
         {focusedImage && (
           <Modal
