@@ -41,7 +41,7 @@ export default class Searchbar extends Component {
     return (
         <form onSubmit={this.handleSubmit} className={SearchbarCSS.SearchForm}>
           <button type="submit" className={SearchbarCSS.SearchForm_button}>
-            <span  className={SearchbarCSS.SearchForm_button_label}>Search</span>
+            Шукати
           </button>
 
           <input
@@ -50,7 +50,7 @@ export default class Searchbar extends Component {
             className={SearchbarCSS.SearchForm_input}
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Пошук фотографій та зображень..."
             value={this.state.query}
             onChange={this.handleChange}
           />
