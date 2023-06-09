@@ -23,6 +23,7 @@ export class App extends Component {
       focusedImage: null,
       error: null,
       blank: false,
+      errorMessage: 'Нажаль за вашим запитом результатів не було знайдено! Спробуйте інший запит'
     };
   }
 
@@ -133,7 +134,7 @@ export class App extends Component {
         {error === true && (
           <Error
             error={
-              'Нажаль за вашим запитом результатів не було знайдено! Спробуйте інший запит'
+              this.state.errorMessage
             }
           />
         )}
