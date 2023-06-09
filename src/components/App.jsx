@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Notiflix from 'notiflix';
 import AppCSS from './App.module.css';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
@@ -22,6 +23,10 @@ export class App extends Component {
       focusedImage: null,
       error: null,
     };
+  }
+
+  componentDidMount() {
+    Notiflix.Notify.info('Program is ready');
   }
 
   handleSearchSubmit = async onSubmit => {
@@ -57,6 +62,7 @@ export class App extends Component {
         }
 
         this.setState({ isLoading: false });
+        Notiflix.Notify.info('Search is executed');
       }
     );
   };
@@ -87,6 +93,7 @@ export class App extends Component {
 
     this.setState({ isLoading: false });
   };
+
 
   handleOpenModal = focusedImage => {
     this.setState({ focusedImage });
