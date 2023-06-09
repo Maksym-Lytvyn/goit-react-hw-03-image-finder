@@ -20,22 +20,22 @@ export default class Searchbar extends Component {
 
   render() {
     return (
-        <form onSubmit={this.handleSubmit} className={SearchbarCSS.SearchForm}>
-          <button type="submit" className={SearchbarCSS.SearchForm_button}>
-            Шукати
-          </button>
+      <form onSubmit={this.handleSubmit} className={SearchbarCSS.SearchForm}>
+        <button type="submit" className={SearchbarCSS.SearchForm_button}>
+          Шукати
+        </button>
 
-          <input
-            name="query"
-            type="text"
-            className={SearchbarCSS.SearchForm_input}
-            autoComplete="off"
-            autoFocus
-            placeholder="Пошук фотографій та зображень..."
-            value={this.state.query}
-            onChange={this.handleChange}
-          />
-        </form>
+        <input
+          name="query"
+          type="text"
+          className={SearchbarCSS.SearchForm_input}
+          autoComplete="off"
+          autoFocus
+          placeholder="Пошук фотографій та зображень..."
+          value={this.state.query}
+          onChange={this.handleChange}
+        />
+      </form>
     );
   }
 }
@@ -43,4 +43,3 @@ export default class Searchbar extends Component {
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-

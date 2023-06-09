@@ -22,7 +22,7 @@ export class App extends Component {
       mounted: true,
       focusedImage: null,
       error: null,
-      blank: false
+      blank: false,
     };
   }
 
@@ -36,40 +36,36 @@ export class App extends Component {
         imageResults: [],
         page: 1,
         onSubmit,
-        isLoading: true
+        isLoading: true,
       },
       async () => {
         try {
           const response = await axios.get(
-                `https://pixabay.com/api/?q=${this.state.onSubmit}&page=1&key=35499078-ae1aac6b87ed3c45ca8fde2a7&image_type=photo&orientation=horizontal&per_page=12`
-              );
+            `https://pixabay.com/api/?q=${this.state.onSubmit}&page=1&key=35499078-ae1aac6b87ed3c45ca8fde2a7&image_type=photo&orientation=horizontal&per_page=12`
+          );
 
           if (response.data.hits.length === 0) {
-            this.setState({ 
+            this.setState({
               isLoading: false,
-              error: true
+              error: true,
             });
-            Notiflix.Notify.failure('Немає результатів!')
-          }
-          else if(this.state.onSubmit === '') {
-            this.setState({blank: true})
-          }
-          else {
-            this.setState({ 
+            Notiflix.Notify.failure('Немає результатів!');
+          } else if (this.state.onSubmit === '') {
+            this.setState({ blank: true });
+          } else {
+            this.setState({
               imageResults: response.data.hits,
               error: false,
-              blank: false
+              blank: false,
             });
-            Notiflix.Notify.info('Пошук виконано');
+            Notiflix.Notify.success('Пошук виконано');
           }
-          
         } catch (error) {
-          this.setState({error: true})
+          this.setState({ error: true });
           console.log(this.state.error);
         }
 
         this.setState({ isLoading: false });
-        
       }
     );
   };
@@ -92,14 +88,13 @@ export class App extends Component {
     if (this.state.imageResults !== prevState.imageResults) {
       this.setState(prevState => ({
         imageResults: [...prevState.imageResults, ...response.data.hits],
-        page: nextPage
+        page: nextPage,
       }));
-      Notiflix.Notify.success("Завантажено додаткові результати за запитом!")
+      Notiflix.Notify.success('Завантажено додаткові результати за запитом!');
     }
 
     this.setState({ isLoading: false });
   };
-
 
   handleOpenModal = focusedImage => {
     this.setState({ focusedImage });
@@ -127,11 +122,21 @@ export class App extends Component {
       <div className={AppCSS.App}>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {isLoading === true && <Loader isLoading={isLoading} />}
-        {onSubmit === null || onSubmit === '' ? (<Blank/>) : (<ImageGallery
-          imageResults={imageResults}
-          onOpenModal={this.handleOpenModal}
-        />)}  
-        {error === true && <Error error={'Нажаль за вашим запитом результатів не було знайдено! Спробуйте інший запит'}/>}
+        {onSubmit === null || onSubmit === '' ? (
+          <Blank />
+        ) : (
+          <ImageGallery
+            imageResults={imageResults}
+            onOpenModal={this.handleOpenModal}
+          />
+        )}
+        {error === true && (
+          <Error
+            error={
+              'Нажаль за вашим запитом результатів не було знайдено! Спробуйте інший запит'
+            }
+          />
+        )}
         {isShowButton && <Button onClick={this.handleLoadMore} />}
         {focusedImage && (
           <Modal

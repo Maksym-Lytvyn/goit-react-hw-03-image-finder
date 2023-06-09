@@ -1,4 +1,2 @@
-const Error = ({error}) => (
-    <div>{error}</div>
-)
+const Error = ({ error }) => <div>{error}</div>;
 export default Error;
